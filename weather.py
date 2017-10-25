@@ -36,7 +36,7 @@ if options.day == "0" and options.version == None:
 	pressureper = json['main']['pressure']
 	sunriseT = json['sys']['sunrise']
 	sunsetsT = json['sys']['sunset']
-	print ''.join(["Hey the temp is ", str(temp), "C, the sky is ", str(desc)])
+	print (''.join(["Hey the temp is ", str(temp), "C, the sky is ", str(desc)]))
 elif (options.version == None):
 	url2 = ''.join(["http://api.wunderground.com/api/",API_key2,"/forecast10day/q/", str(data['country_code']),"/", str(data['city']), ".json"])
 	req = urllib2.Request(url2)
@@ -51,22 +51,22 @@ elif (options.version == None):
 	date = json['forecast']['simpleforecast']['forecastday'][day]['date']['epoch']
 	date = float(date)
 	day = time.strftime("%a, %d %b", time.localtime(date))
-	print ''.join(["Hey the temp for ", day, " will be ", str(temp_low), "C~", str(temp_high),"C, the sky will be ", str(desc)])
+	print (''.join(["Hey the temp for ", day, " will be ", str(temp_low), "C~", str(temp_high),"C, the sky will be ", str(desc)]))
 if options.cloud == True:
-	print ''.join(["The clouds cover ", str(cloudper), "% of the sky"])
+	print (''.join(["The clouds cover ", str(cloudper), "% of the sky"]))
 if options.humidity == True:
-	print ''.join(["The humidity level is ", str(humidityper), "%"])
+	print (''.join(["The humidity level is ", str(humidityper), "%"]))
 if options.pressure == True:
-	print ''.join(["The current pressure is ", str(pressureper), " hpa"])
+	print (''.join(["The current pressure is ", str(pressureper), " hpa"]))
 if options.sunrise == True and options.day == "0":
 	sunriseT = time.strftime("%H:%M:%S (%a, %d %b)", time.localtime(sunriseT))
-	print ''.join(["The sun rises at ", str(sunriseT)])
+	print (''.join(["The sun rises at ", str(sunriseT)]))
 if options.sunset == True and options.day == "0":
 	sunsetsT = time.strftime("%H:%M:%S (%a, %d %b)", time.localtime(sunsetsT))
-	print ''.join(["The sun sets at ", str(sunsetsT)])
+	print (''.join(["The sun sets at ", str(sunsetsT)]))
 if options.sunset == True and options.day != "0":
-	print sunsetsT
+	print (sunsetsT)
 if options.sunrise == True and options.day != "0":
-	print sunriseT
+	print (sunriseT)
 if options.version == True:
-	print "\033[92m Weather V1.0.0 created by ImOverlord (GamingAndChill) \x1B[0m"
+	print ("\033[92m Weather V1.0.0 created by ImOverlord (GamingAndChill) \x1B[0m")
