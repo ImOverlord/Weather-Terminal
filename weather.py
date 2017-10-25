@@ -1,12 +1,11 @@
 #! /usr/bin/env python3
 import requests
-import urllib2
 import json
 import sys
 import os
 from optparse import OptionParser
 import time
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 with open('/home/ImOverlord/Documents/Proj/Weather/settings.json') as json_data_file:
     data = json.load(json_data_file)
