@@ -38,7 +38,7 @@ if options.day == "0" and options.version == None:
 	sunsetsT = json['sys']['sunset']
 	print ''.join(["Hey the temp is ", str(temp), "C, the sky is ", str(desc)])
 elif (options.version == None):
-	url2 = ''.join(["http://api.wunderground.com/api/",API_key2,"/forecast10day/q/FR/", str(data['city']), ".json"])
+	url2 = ''.join(["http://api.wunderground.com/api/",API_key2,"/forecast10day/q/", str(data['country_code']),"/", str(data['city']), ".json"])
 	req = urllib2.Request(url2)
 	opener = urllib2.build_opener()
 	f = opener.open(req)
