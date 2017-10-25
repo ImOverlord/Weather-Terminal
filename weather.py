@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 import requests
 import urllib2
 import json
@@ -25,10 +25,8 @@ parser.add_option("-n", "--day", action="store", dest="day", help="gets the weat
 (options, args) = parser.parse_args()
 if options.day == "0" and options.version == None:
 	url = ''.join(["http://api.openweathermap.org/data/2.5/weather?q=", data['city'], "&appid=", str(API_key1)])
-	req = urllib2.Request(url)
-	opener = urllib2.build_opener()
-	f = opener.open(req)
-	json = json.loads(f.read())
+	resp = requests.get(url=url)
+	json = json.loads(resp.text)
 	temp = json['main']['temp'] - 273.15
 	desc = json['weather'][0]['main']
 	cloudper = json['clouds']['all']
@@ -39,10 +37,8 @@ if options.day == "0" and options.version == None:
 	print (''.join(["Hey the temp is ", str(temp), "C, the sky is ", str(desc)]))
 elif (options.version == None):
 	url2 = ''.join(["http://api.wunderground.com/api/",API_key2,"/forecast10day/q/", str(data['country_code']),"/", str(data['city']), ".json"])
-	req = urllib2.Request(url2)
-	opener = urllib2.build_opener()
-	f = opener.open(req)
-	json = json.loads(f.read())
+	resp = requests.get(url=url2)
+	json = json.loads(resp.text)
 	day = int(options.day)
 	temp_low = json['forecast']['simpleforecast']['forecastday'][day]['low']['celsius']
 	temp_high = json['forecast']['simpleforecast']['forecastday'][day]['high']['celsius']
@@ -52,11 +48,11 @@ elif (options.version == None):
 	date = float(date)
 	day = time.strftime("%a, %d %b", time.localtime(date))
 	print (''.join(["Hey the temp for ", day, " will be ", str(temp_low), "C~", str(temp_high),"C, the sky will be ", str(desc)]))
-if options.cloud == True:
+if options.cloud == True and options.day == "0":
 	print (''.join(["The clouds cover ", str(cloudper), "% of the sky"]))
 if options.humidity == True:
 	print (''.join(["The humidity level is ", str(humidityper), "%"]))
-if options.pressure == True:
+if options.pressure == True and options.day == "0":
 	print (''.join(["The current pressure is ", str(pressureper), " hpa"]))
 if options.sunrise == True and options.day == "0":
 	sunriseT = time.strftime("%H:%M:%S (%a, %d %b)", time.localtime(sunriseT))
@@ -64,9 +60,5 @@ if options.sunrise == True and options.day == "0":
 if options.sunset == True and options.day == "0":
 	sunsetsT = time.strftime("%H:%M:%S (%a, %d %b)", time.localtime(sunsetsT))
 	print (''.join(["The sun sets at ", str(sunsetsT)]))
-if options.sunset == True and options.day != "0":
-	print (sunsetsT)
-if options.sunrise == True and options.day != "0":
-	print (sunriseT)
 if options.version == True:
 	print ("\033[92m Weather V1.0.0 created by ImOverlord (GamingAndChill) \x1B[0m")
